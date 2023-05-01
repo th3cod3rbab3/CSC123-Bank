@@ -136,7 +136,7 @@ public class MainBank {
 					break;
 
 				case 7:
-					//find account and close it
+					//find account and close its
 					
 					
 					try {

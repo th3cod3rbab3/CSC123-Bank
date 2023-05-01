@@ -12,7 +12,7 @@ public class Account implements Serializable {
 	private String accountName;
 	private Customer accountHolder;
 	private ArrayList<Transaction> transactions;
-	private Currency cy;
+	
 	String currBuying;
 	String currSelling;
 	
