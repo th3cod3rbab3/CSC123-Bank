@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import com.usman.csudh.bank.core.Account;
 import com.usman.csudh.bank.core.AccountClosedException;
 import com.usman.csudh.bank.core.Bank;
+import com.usman.csudh.bank.core.Currency;
 import com.usman.csudh.bank.core.InsufficientBalanceException;
 import com.usman.csudh.bank.core.NoSuchAccountException;
 import com.usman.csudh.util.UIManager;
@@ -26,11 +27,11 @@ public class MainBank {
 	public static final String MSG_AMOUNT = "Enter amount: ";
 	public static final String MSG_ACCOUNT_NUMBER = "Enter account number: ";
 	public static final String MSG_ACCOUNT_ACTION = "%n%s was %s, account balance is: %s%n%n";
-	
+	public static final String MSG_ACCOUNT_EXCHANGERATE = "The exchange rate %n and you will get %s %n";
 
 	//Declare main menu and prompt to accept user input
-	public static final String[] menuOptions = { "Open Checking Account%n","Open Saving Account%n", "List Accounts%n","View Statement%n", "Deposit Funds%n", "Withdraw Funds%n",
-			"Close an Account%n", "Exit%n" };
+	public static final String[] menuOptions = { "Open Checking Account%n","Open Saving Account%n", "List Accounts%n","View Statement%n", "Show Account Information%n", "Deposit Funds%n", "Withdraw Funds%n",
+			"Currency Conversion%n", "Close an Account%n", "Exit%n" };
 	public static final String MSG_PROMPT = "%nEnter choice: ";
 
 	
@@ -47,10 +48,11 @@ public class MainBank {
 	
 	
 	//Main method. 
-	public static void main(String[] args) {
-
+	public static void main(String[] args){
+		
 		new MainBank(System.in,System.out).run();
-
+		
+		
 	}
 	
 	
@@ -88,7 +90,7 @@ public class MainBank {
 
 				case 3:
 					
-					//Get bank to print list of accounts to the output stream provided as method arguemnt
+					//Get bank to print list of accounts to the output stream provided as method arguement
 					Bank.listAccounts(this.out);
 					break;
 					
@@ -103,6 +105,7 @@ public class MainBank {
 					}		
 					
 					break;
+				
 
 				case 5:
 					//find account, deposit money and print result
@@ -145,14 +148,42 @@ public class MainBank {
 					} catch (NoSuchAccountException e) {
 						this.handleException(ui, e);
 
-					}
+					}				
 					break;
+				case 8:
+					Currency money = new Currency();
+					//
+					try {
+						int accountNumber=ui.readInt(MSG_ACCOUNT_NUMBER);
+						money.conversion();
+						ui.print("", new Object[] { accountNumber, Bank.getBalance(accountNumber) });
+					}
+					catch (NoSuchAccountException e) {
+						this.handleException(ui, e);
+
+					}				
+					break;
+					
+				case 9:
+					try {
+						
+						int accountNumber=ui.readInt(MSG_ACCOUNT_NUMBER);
+						Bank.accountInformation(accountNumber);
+						ui.print("MSG_ACCOUNT_EXCHANERATE", new Object[] { accountNumber, Bank.getBalance(accountNumber) });
+					}
+					catch (NoSuchAccountException e) {
+						this.handleException(ui, e);
+
+					}				
+					break;
+					
 				
+					
 				}
 
 			} while (option != menuOptions.length);
-
-		} catch (IOException e) {
+			
+			}catch (IOException e) {
 			e.printStackTrace();
 
 		}

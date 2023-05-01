@@ -12,6 +12,9 @@ public class Account implements Serializable {
 	private String accountName;
 	private Customer accountHolder;
 	private ArrayList<Transaction> transactions;
+	private Currency cy;
+	String currBuying;
+	String currSelling;
 	
 	private boolean open=true;
 	private int accountNumber;
@@ -21,6 +24,18 @@ public class Account implements Serializable {
 		accountHolder=customer;
 		transactions=new ArrayList<Transaction>();
 		accountNumber=UniqueCounter.nextValue();
+	}
+	public void setCurrSelling(String currSelling) {
+		this.currSelling=currSelling;
+	}
+	public String getCurrSelling() {
+		return currSelling;
+	}
+	public void setCurrBuying(String currBuying) {
+		this.currBuying=currBuying;
+	}
+	public String getCurrBuying() {
+		return currBuying;
 	}
 	
 	public String getAccountName() {

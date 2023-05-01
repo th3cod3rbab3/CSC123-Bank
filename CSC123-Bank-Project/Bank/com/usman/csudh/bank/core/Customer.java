@@ -103,7 +103,7 @@ public class Customer implements Serializable{
 	@Override
 	public String toString() {
 		
-		return firstName+" : "+lastName+" : "+ssn; 
+		return firstName + " : " + lastName + " : " + ssn; 
 	}
 	
 	/**
@@ -119,6 +119,7 @@ public class Customer implements Serializable{
 				&&this.lastName.equalsIgnoreCase(other.getLastName())
 						&&this.ssn.equalsIgnoreCase(other.getSSN());
 	}
+
 	
 	
 	

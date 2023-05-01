@@ -17,6 +17,17 @@ public class Bank {
 		
 	}
 	
+	public static void accountInformation(int accountNumber) throws NoSuchAccountException{
+		
+		lookup(accountNumber);
+		System.out.println("Account Number: "+ accountNumber);
+		System.out.println("Name: " + lookup(accountNumber).getAccountHolder().getFirstName() + " " + lookup(accountNumber).getAccountHolder().getLastName());
+		System.out.println("SSN: " + lookup(accountNumber).getAccountHolder().getSSN());
+		System.out.println("Currency: " +lookup(accountNumber).getCurrSelling());
+		System.out.println("Currency Balance: ");
+		System.out.println("USD Balance: ");
+	}
+	
 	public static Account openSavingAccount(String firstName, String lastName, String ssn) {
 		Customer c=new Customer(firstName,lastName, ssn);
 		Account a=new SavingAccount(c);
@@ -72,6 +83,8 @@ public class Bank {
 		
 		lookup(accountNumber).printTransactions(out);
 	}
+	
+//public static void 
 				
 	
 	
